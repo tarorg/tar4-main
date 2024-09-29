@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const products = [
+    { title: "Product A", price: "$19.99", stock: 15, imageUrl: "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=1600" },
+    { title: "Product B", price: "$24.99", stock: 8, imageUrl: "https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&w=1600" },
+    { title: "Product C", price: "$39.99", stock: 3, imageUrl: "https://images.pexels.com/photos/1279107/pexels-photo-1279107.jpeg?auto=compress&cs=tinysrgb&w=1600" },
+];
+---
+
+<Layout title="Pin">
+    <main class="min-h-screen p-8">
+        <h1 class="text-3xl font-bold mb-6">Products</h1>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {products.map((product) => (
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src={product.imageUrl} alt={product.title} class="w-full h-48 object-cover" />
+                    <div class="p-4">
+                        <h2 class="text-xl font-semibold mb-2">{product.title}</h2>
+                        <p class="text-gray-600 mb-2">{product.price}</p>
+                        <p class="text-sm text-gray-500">In stock: {product.stock}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </main>
+</Layout>

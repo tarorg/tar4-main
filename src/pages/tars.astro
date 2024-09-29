@@ -1,0 +1,343 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const modules = [
+    "All", "Products", "Files", "Posts", "Pathai", "Settings", "Links", "Reports", "Pin"
+];
+
+const searchResults = [
+    { title: "Product A", category: "Products", price: "$19.99", stock: 15, imageUrl: "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=1600" },
+    { title: "Product B", category: "Products", price: "$24.99", stock: 8, imageUrl: "https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&w=1600" },
+    { title: "Product C", category: "Products", price: "$39.99", stock: 3, imageUrl: "https://images.pexels.com/photos/1279107/pexels-photo-1279107.jpeg?auto=compress&cs=tinysrgb&w=1600" },
+    { title: "Mountain Landscape", category: "Files", description: "Scenic mountain view", imageUrl: "https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg?auto=compress&cs=tinysrgb&w=1600" },
+    { title: "Beach Sunset", category: "Files", description: "Beautiful beach at sunset", imageUrl: "https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg?auto=compress&cs=tinysrgb&w=1600" },
+    { title: "Latest Post", category: "Posts", description: "New feature announcement" },
+    { title: "Product Review", category: "Posts", description: "In-depth analysis of Product B" },
+    { title: "Pathai Route", category: "Pathai", description: "Scenic route information" },
+    { title: "User Settings", category: "Settings", description: "Manage your account" },
+    { title: "Twitter Profile", category: "Links", description: "Follow me on Twitter", url: "https://twitter.com/username", icon: `<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>` },
+    { title: "Mastodon Profile", category: "Links", description: "Follow me on Mastodon", url: "https://mastodon.social/@username", icon: `<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/></svg>` },
+    { title: "Personal Website", category: "Links", description: "Visit my personal website", url: "https://www.example.com", icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>` },
+    { title: "Monthly Sales Report", category: "Reports", description: "Overview of sales performance" },
+];
+---
+
+<Layout title="Tars - Search">
+    <div class="min-h-screen bg-white p-4">
+        <div class="w-full max-w-2xl mx-auto">
+            <form class="mb-8">
+                <div class="flex">
+                    <select id="search-filter" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600">
+                        {modules.map((module) => (
+                            <option value={module}>{module}</option>
+                        ))}
+                    </select>
+                    <div class="relative w-full">
+                        <input type="search" id="search-input" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-0 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search..." required />
+                        <button type="button" id="add-button" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                            </svg>
+                            <span class="sr-only">Add</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div id="pin-blocks" class="hidden mb-4">
+                <div class="flex justify-between">
+                    <div id="container-customer" class="w-1/2 p-2 bg-gray-100 rounded mr-2 cursor-pointer">
+                        <h3 class="font-medium">Customer</h3>
+                        <p class="text-sm">John Doe</p>
+                    </div>
+                    <div id="container-cart" class="w-1/2 p-2 bg-gray-100 rounded ml-2 cursor-pointer">
+                        <h3 class="font-medium">Cart</h3>
+                        <p class="text-sm">2 items - $44.98</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Update this bottom sheet for table selection -->
+            <div id="table-selector" class="fixed inset-x-0 bottom-0 bg-white rounded-t-3xl shadow-lg transform translate-y-full transition-transform duration-300 ease-in-out z-50">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold mb-4">Select Table</h3>
+                    <div class="grid grid-cols-5 gap-4">
+                        {Array.from({ length: 20 }, (_, i) => (
+                            <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center cursor-pointer hover:bg-gray-300 transition-colors">
+                                <span class="text-gray-700 font-medium">{i + 1}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            <div id="search-results">
+                <ul class="divide-y divide-gray-100" id="list-view">
+                    {searchResults.map((result) => (
+                        <li class="py-3 hover:bg-gray-50 transition-colors duration-150 ease-in-out">
+                            <div class="flex items-stretch justify-between h-full">
+                                <div class="flex items-center">
+                                    {result.imageUrl ? (
+                                        <div class="w-16 h-16 flex-shrink-0 mr-4">
+                                            <img src={result.imageUrl} alt={result.title} class="w-full h-full object-cover rounded" />
+                                        </div>
+                                    ) : result.icon ? (
+                                        <div class="w-16 h-16 flex items-center justify-center text-gray-500 mr-4" set:html={result.icon} />
+                                    ) : null}
+                                    <div class="flex flex-col justify-between h-full">
+                                        <div>
+                                            <h2 class="text-base font-medium text-gray-800">
+                                                {result.url ? <a href={result.url} target="_blank" rel="noopener noreferrer">{result.title}</a> : result.title}
+                                            </h2>
+                                            {result.category !== "Products" && (
+                                                <p class="text-sm text-gray-600 mt-1">{result.description}</p>
+                                            )}
+                                        </div>
+                                        {result.price && <p class="text-sm font-medium text-blue-600 mt-1">{result.price}</p>}
+                                    </div>
+                                </div>
+                                <div class="flex flex-col justify-end">
+                                    {result.category === "Products" ? (
+                                        <span class="text-xs text-gray-400 mt-auto">{result.stock}</span>
+                                    ) : (
+                                        <span class="text-xs text-gray-400">{result.category}</span>
+                                    )}
+                                </div>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+
+                <div id="pin-view" class="hidden">
+                    <div class="mb-4 flex flex-wrap gap-2">
+                        <button class="chip active" data-filter="all">All</button>
+                        <button class="chip" data-filter="food">Food</button>
+                        <button class="chip" data-filter="drink">Drink</button>
+                        <button class="chip" data-filter="dessert">Dessert</button>
+                    </div>
+                    <div class="divide-y divide-gray-100">
+                        {searchResults.filter(item => item.category === "Products").map((product) => (
+                            <div class="group relative flex items-center py-3" data-category={product.subcategory}>
+                                <div class="w-14 h-14 overflow-hidden rounded-md bg-gray-200 mr-4">
+                                    <img src={product.imageUrl} alt={product.title} class="w-full h-full object-cover object-center" />
+                                </div>
+                                <div class="flex-grow flex flex-col">
+                                    <h3 class="text-sm text-gray-700">
+                                        <a href="#">
+                                            <span aria-hidden="true" class="absolute inset-0"></span>
+                                            {product.title}
+                                        </a>
+                                    </h3>
+                                    <p class="mt-1 text-sm text-gray-500">{product.stock}</p>
+                                </div>
+                                <div class="flex-shrink-0 self-end">
+                                    <p class="text-sm font-medium text-gray-900">{product.price}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<style>
+    /* Add these styles to your existing styles */
+    .rounded-full {
+        transition: background-color 0.3s ease;
+    }
+    
+    .rounded-full:hover {
+        background-color: #e5e7eb;
+    }
+    
+    #table-selector {
+        background-color: white !important;
+        z-index: 9999 !important;
+    }
+    
+    .chip {
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+        background-color: #f3f4f6;
+        color: #4b5563;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+    }
+
+    .chip:hover {
+        background-color: #e5e7eb;
+    }
+
+    .chip.active {
+        background-color: #1d4ed8; /* bg-blue-700 */
+        color: white;
+    }
+</style>
+
+<script>
+    const searchInput = document.getElementById('search-input') as HTMLInputElement;
+    const searchFilter = document.getElementById('search-filter') as HTMLSelectElement;
+    const listView = document.getElementById('list-view');
+    const pinView = document.getElementById('pin-view');
+    const pinBlocks = document.getElementById('pin-blocks');
+    const containerCart = document.getElementById('container-cart');
+    const containerCustomer = document.getElementById('container-customer');
+    const tableSelector = document.getElementById('table-selector');
+    
+    if (searchInput && searchFilter && listView && pinView && pinBlocks && containerCart && containerCustomer && tableSelector) {
+        function filterResults() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedModule = searchFilter.value;
+
+            if (selectedModule === 'Pin') {
+                if (listView) listView.style.display = 'none';
+                if (pinView) pinView.style.display = 'block';
+                if (pinBlocks) pinBlocks.style.display = 'block';
+                
+                pinView?.querySelectorAll('.group').forEach((item) => {
+                    const title = item.querySelector('h3')?.textContent?.toLowerCase() || '';
+                    (item as HTMLElement).style.display = title.includes(searchTerm) ? '' : 'none';
+                });
+            } else {
+                if (listView) listView.style.display = 'block';
+                if (pinView) pinView.style.display = 'none';
+                if (pinBlocks) pinBlocks.style.display = 'none';
+
+                Array.from(listView?.children || []).forEach((item) => {
+                    const title = item.querySelector('h2')?.textContent?.toLowerCase() || '';
+                    const description = item.querySelector('p')?.textContent?.toLowerCase() || '';
+                    const category = item.querySelector('span:last-child')?.textContent || '';
+                    const isProduct = category.match(/^\d+$/); // Check if the category is a number (stock)
+
+                    const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+                    const matchesModule = 
+                        selectedModule === 'All' || 
+                        (selectedModule === 'Products' && isProduct) || 
+                        (selectedModule !== 'Products' && category === selectedModule);
+
+                    (item as HTMLElement).style.display = (matchesSearch && matchesModule) ? '' : 'none';
+                });
+            }
+
+            localStorage.setItem('selectedModule', selectedModule);
+        }
+
+        searchInput.addEventListener('input', filterResults);
+        searchFilter.addEventListener('change', filterResults);
+
+        const savedModule = localStorage.getItem('selectedModule');
+        if (savedModule && searchFilter.querySelector(`option[value="${savedModule}"]`)) {
+            searchFilter.value = savedModule;
+        }
+
+        filterResults();
+
+        containerCart.addEventListener('click', () => {
+            window.location.href = '/cart';
+        });
+
+        containerCustomer.addEventListener('click', () => {
+            tableSelector.classList.toggle('translate-y-full');
+        });
+
+        // Close the bottom sheet when clicking outside of it
+        document.addEventListener('click', (event) => {
+            if (!tableSelector.contains(event.target as Node) && !containerCustomer.contains(event.target as Node)) {
+                tableSelector.classList.add('translate-y-full');
+            }
+        });
+
+        // Handle table selection
+        tableSelector.querySelectorAll('.rounded-full').forEach((circle) => {
+            circle.addEventListener('click', (event) => {
+                const tableNumber = (event.target as HTMLElement).textContent;
+                const customerText = containerCustomer.querySelector('p');
+                if (customerText) {
+                    customerText.textContent = `Table ${tableNumber}`;
+                }
+                tableSelector.classList.add('translate-y-full');
+            });
+        });
+    }
+
+    // Add this new function to handle adding items to the cart
+    function addToCart(product: any) {
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const existingItem = cart.find((item: any) => item.title === product.title);
+        
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({ ...product, quantity: 1 });
+        }
+        
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const totalItems = cart.reduce((sum: number, item: any) => sum + item.quantity, 0);
+        const totalPrice = cart.reduce((sum: number, item: any) => sum + parseFloat(item.price.replace('$', '')) * item.quantity, 0);
+        
+        const cartDisplay = document.querySelector('#container-cart p');
+        if (cartDisplay) {
+            cartDisplay.textContent = `${totalItems} item${totalItems !== 1 ? 's' : ''} - $${totalPrice.toFixed(2)}`;
+        }
+    }
+
+    // Add event listeners for the "Add to Cart" buttons
+    function setupAddToCartButtons() {
+        document.querySelectorAll('.add-to-cart').forEach((button: Element) => {
+            button.addEventListener('click', (e: Event) => {
+                const target = e.target as HTMLButtonElement;
+                const product = JSON.parse(target.dataset.product || '{}');
+                addToCart(product);
+            });
+        });
+    }
+
+    // Call this function to set up the event listeners
+    setupAddToCartButtons();
+
+    // Initialize cart display
+    updateCartDisplay();
+
+    // Add this at the end of the script
+    const addButton = document.getElementById('add-button');
+    if (addButton) {
+        addButton.addEventListener('click', () => {
+            console.log('Add button clicked');
+            // You can add functionality here in the future
+        });
+    }
+
+    // Add this new function to handle product filtering
+    function setupProductFilters() {
+        const filterChips = document.querySelectorAll('#pin-view .chip');
+        const productItems = document.querySelectorAll('#pin-view .group');
+
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                const filter = chip.getAttribute('data-filter');
+                
+                filterChips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+
+                productItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
+
+    // Call this function to set up the product filters
+    setupProductFilters();
+</script>

@@ -33,25 +33,27 @@
         height: 100%;
         width: 100%;
         background-color: #ffffff;
+        max-width: 100%;
+        margin: 0 auto;
     }
     .header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 20px;
+        padding: 15px;
         border-bottom: 1px solid #e5e7eb;
         background-color: #f9fafb;
     }
     .header h2 {
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 600;
         color: #1f2937;
     }
     .chevron {
         border: solid #6b7280;
-        border-width: 0 3px 3px 0;
+        border-width: 0 2px 2px 0;
         display: inline-block;
-        padding: 6px;
+        padding: 4px;
         transform: rotate(45deg);
     }
     .options {
@@ -68,10 +70,10 @@
     .options button {
         width: 100%;
         text-align: left;
-        padding: 20px;
+        padding: 15px;
         background: none;
         border: none;
-        font-size: 22px;
+        font-size: 18px;
         font-weight: 600;
         cursor: pointer;
         transition: background-color 0.3s;
@@ -89,9 +91,22 @@
     @media (min-width: 640px) {
         .container {
             max-width: 640px;
-            margin: 0 auto;
             border-left: 1px solid #e5e7eb;
             border-right: 1px solid #e5e7eb;
+        }
+        .header {
+            padding: 20px;
+        }
+        .header h2 {
+            font-size: 24px;
+        }
+        .chevron {
+            border-width: 0 3px 3px 0;
+            padding: 6px;
+        }
+        .options button {
+            padding: 20px;
+            font-size: 22px;
         }
     }
 </style>

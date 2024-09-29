@@ -112,21 +112,30 @@
     padding: 20px;
     min-height: calc(100vh - 80px); /* Adjusted for top container */
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   .flight-info {
     margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .flight-info > div {
+    flex: 1;
   }
   .city {
     font-size: 14px;
     margin-bottom: 5px;
   }
   .code {
-    font-size: 48px;
+    font-size: 36px;
     font-weight: bold;
     margin-bottom: 10px;
   }
   .price {
-    font-size: 36px;
+    font-size: 28px;
     font-weight: bold;
     margin-bottom: 20px;
   }
@@ -146,6 +155,58 @@
     border: none;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     margin: 20px 0;
+  }
+
+  @media (max-width: 768px) {
+    .top-container {
+      padding: 15px;
+    }
+    .book-text h2 {
+      font-size: 20px;
+    }
+    .icon {
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+    }
+    .container {
+      padding: 15px;
+    }
+    .code {
+      font-size: 28px;
+    }
+    .price {
+      font-size: 24px;
+    }
+    .details {
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .top-container {
+      padding: 10px;
+    }
+    .book-text h2 {
+      font-size: 18px;
+    }
+    .icon {
+      width: 18px;
+      height: 18px;
+      margin-left: 8px;
+    }
+    .container {
+      padding: 10px;
+    }
+    .code {
+      font-size: 24px;
+    }
+    .price {
+      font-size: 20px;
+    }
+    .details {
+      font-size: 10px;
+    }
   }
 </style>
 
